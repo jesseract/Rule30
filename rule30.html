@@ -33,18 +33,39 @@
       function makeInitialGeneration(){
         //create and draw single square when page is loaded
         generationNumber = 0;
+
+        var squares = [];
+        for (var i=0; i<49; i++){
+          squares.push(false);
+        }
+        squares.push(true);
+        for (var i=0; i<49; i++){
+          squares.push(false);
+        }
+        generationSquares = squares;
+
         drawGeneration();
       }
 
-      function drawSquare(){
+      function drawSquare(row, column, filled){
         //draw a single square at a row/column
+        var grid = document.getElementById("grid");
+        var context = grid.getContext("2d");
+
+        if (filled){
+          context.fillStyle = "red";
+        } else {
+          context.fillStyle = "white";
+        }
+
+        context.fillRect(column * 10, row * 10, 10, 10)
       }
 
       function drawGeneration(){
         //draw a generation of squares given an array and number of generation
-
-        //TODO get rid of this
-        document.getElementById("button").value = generationNumber;
+        for (var i=0; i<generationSquares.length; i++){
+          drawSquare(generationNumber, i, generationSquares[i]);
+        }
       }
 
       function makeNextGeneration(){
@@ -64,7 +85,7 @@
   </head>
   <body onload="javascript: makeInitialGeneration();">
     <h1>Rule 30 Cellular Automata</h1>
-    <p><canvas width="500" height="450"></canvas></p>
+    <p><canvas id="grid" width="990" height="480"></canvas></p>
     <p><input id="button" type="button" value="Start" onclick="javascript: startStop();"></p>
   </body>
 </html>
