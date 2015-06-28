@@ -8,6 +8,23 @@
       var generationSquares;
       var generationNumber;
 
+      function makeInitialGeneration(){
+        //create and draw single square when page is loaded
+        generationNumber = 0;
+
+        var squares = [];
+        for (var i=0; i<49; i++){
+          squares.push(false);
+        }
+        squares.push(true);
+        for (var i=0; i<49; i++){
+          squares.push(false);
+        }
+        generationSquares = squares;
+
+        drawGeneration();
+      }
+
       function startStop(){
         if (isRunning){
           //stop process and change button text to stop
@@ -30,47 +47,16 @@
         }
       }
 
-      function makeInitialGeneration(){
-        //create and draw single square when page is loaded
-        generationNumber = 0;
-
-        var squares = [];
-        for (var i=0; i<49; i++){
-          squares.push(false);
-        }
-        squares.push(true);
-        for (var i=0; i<49; i++){
-          squares.push(false);
-        }
-        generationSquares = squares;
-
-        drawGeneration();
-      }
-
-      function drawSquare(row, column, filled){
-        //draw a single square at a row/column
-        var grid = document.getElementById("grid");
-        var context = grid.getContext("2d");
-
-        if (filled){
-          context.fillStyle = "red";
-        } else {
-          context.fillStyle = "white";
-        }
-
-        context.fillRect(column * 10, row * 10, 10, 10)
-      }
-
-      function drawGeneration(){
-        //draw a generation of squares given an array and number of generation
-        for (var i=0; i<generationSquares.length; i++){
-          drawSquare(generationNumber, i, generationSquares[i]);
-        }
-      }
-
       function makeNextGeneration(){
         //create a next generation from the previous generation
         generationNumber = generationNumber + 1;
+        // Disables the start button when the canvas is full
+        if (generationNumber == Math.floor(generationSquares.length / 2) - 1){
+          if (isRunning){
+            startStop();
+          }
+          document.getElementById("button").disabled = true;
+        }
 
         var squares = [];
         for (var i=0; i<generationSquares.length; i++){
@@ -90,7 +76,10 @@
             right = generationSquares[i + 1];
           }
 
-          if ((left && center && right) || (left && center && !right) || (left && !center && right) || (!left && !center && !right)){
+          if ((left && center && right)
+              || (left && center && !right)
+              || (left && !center && right)
+              || (!left && !center && !right)){
             squares.push(false);
           } else {
             squares.push(true);
@@ -100,6 +89,26 @@
         generationSquares = squares;
       }
 
+      function drawGeneration(){
+        //draw a generation of squares given an array and number of generation
+        for (var i=0; i<generationSquares.length; i++){
+          drawSquare(generationNumber, i, generationSquares[i]);
+        }
+      }
+
+      function drawSquare(row, column, filled){
+        //draw a single square at a row/column
+        var grid = document.getElementById("grid");
+        var context = grid.getContext("2d");
+
+        if (filled){
+          context.fillStyle = "red";
+        } else {
+          context.fillStyle = "white";
+        }
+
+        context.fillRect(column * 10, row * 10, 10, 10)
+      }
     </script>
     <style type="text/css">
       body {
