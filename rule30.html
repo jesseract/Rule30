@@ -4,13 +4,31 @@
     <meta charset="utf-8">
     <title>Rule 30</title>
     <script type="text/javascript">
+      var isRunning = false;
+
       function startStop(){
-        alert("Hi");
+        if (isRunning){
+          //stop process and change button text to stop
+          isRunning = false;
+          document.getElementById("button").value = "Start";
+        } else {
+          isRunning = true;
+          document.getElementById("button").value = "Stop";
+        }
       }
     </script>
+    <style type="text/css">
+      body {
+        background-color: grey;
+      }
+      canvas {
+        background-color: lightgrey;
+      }
+    </style>
   </head>
   <body>
     <h1>Rule 30 Cellular Automata</h1>
-    <input type="button" value="Start" onclick="javascript: startStop();">
+    <p><canvas width="500" height="450"></canvas></p>
+    <p><input id="button" type="button" value="Start" onclick="javascript: startStop();"></p>
   </body>
 </html>
