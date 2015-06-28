@@ -5,6 +5,8 @@
     <title>Rule 30</title>
     <script type="text/javascript">
       var isRunning = false;
+      var generationSquares;
+      var generationNumber;
 
       function startStop(){
         if (isRunning){
@@ -14,8 +16,42 @@
         } else {
           isRunning = true;
           document.getElementById("button").value = "Stop";
+
+          animateNextStep();
         }
       }
+
+      function animateNextStep(){
+        //stop if we should stop and then make the next generation and draw it, do the next step after half a second
+        if (isRunning){
+          makeNextGeneration();
+          drawGeneration();
+          setTimeout(animateNextStep, 500);
+        }
+      }
+
+      function makeInitialGeneration(){
+        //create and draw single square when page is loaded
+        generationNumber = 0;
+        drawGeneration();
+      }
+
+      function drawSquare(){
+        //draw a single square at a row/column
+      }
+
+      function drawGeneration(){
+        //draw a generation of squares given an array and number of generation
+
+        //TODO get rid of this
+        document.getElementById("button").value = generationNumber;
+      }
+
+      function makeNextGeneration(){
+        //create a next generation from the previous generation
+        generationNumber = generationNumber + 1;
+      }
+
     </script>
     <style type="text/css">
       body {
@@ -26,7 +62,7 @@
       }
     </style>
   </head>
-  <body>
+  <body onload="javascript: makeInitialGeneration();">
     <h1>Rule 30 Cellular Automata</h1>
     <p><canvas width="500" height="450"></canvas></p>
     <p><input id="button" type="button" value="Start" onclick="javascript: startStop();"></p>
