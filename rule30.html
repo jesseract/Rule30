@@ -71,6 +71,33 @@
       function makeNextGeneration(){
         //create a next generation from the previous generation
         generationNumber = generationNumber + 1;
+
+        var squares = [];
+        for (var i=0; i<generationSquares.length; i++){
+          var center = generationSquares[i];
+          var left;
+          var right;
+
+          if (i > 0){
+            left = generationSquares[i - 1];
+          } else {
+            left = false;
+          }
+
+          if (i == generationSquares.length - 1){
+            right = false;
+          } else {
+            right = generationSquares[i + 1];
+          }
+
+          if ((left && center && right) || (left && center && !right) || (left && !center && right) || (!left && !center && !right)){
+            squares.push(false);
+          } else {
+            squares.push(true);
+          }
+        }
+
+        generationSquares = squares;
       }
 
     </script>
@@ -85,7 +112,7 @@
   </head>
   <body onload="javascript: makeInitialGeneration();">
     <h1>Rule 30 Cellular Automata</h1>
-    <p><canvas id="grid" width="990" height="480"></canvas></p>
+    <p><canvas id="grid" width="990" height="490"></canvas></p>
     <p><input id="button" type="button" value="Start" onclick="javascript: startStop();"></p>
   </body>
 </html>
