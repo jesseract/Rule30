@@ -104,7 +104,7 @@
         var context = grid.getContext("2d");
 
         if (filled){
-          context.fillStyle = "red";
+          context.fillStyle = "#DB0000";
         } else {
           context.fillStyle = "white";
         }
@@ -114,10 +114,18 @@
     </script>
     <style type="text/css">
       body {
-        background-color: grey;
+        background-color: #E0E0F0;
+        font-family: "Athelas" "Georgia" serif;
       }
       canvas {
-        background-color: lightgrey;
+        background-color: #C0C0D0;
+        border: 1px solid #A0A0B0;
+      }
+      input[type = "button"] {
+        padding: 1em;
+        border: none;
+        border-radius: .2em;
+        font-size: 14px;
       }
     </style>
   </head>
