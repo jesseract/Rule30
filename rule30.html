@@ -8,7 +8,29 @@
       var generationSquares;
       var generationNumber;
 
-      function makeInitialGeneration(){
+      function setUp(){
+          setUpSquares();
+          setUpGrid();
+
+          document.getElementById("button").disabled = false;
+      }
+
+      function setUpGrid(){
+        var grid = document.getElementById("grid");
+        var context = grid.getContext("2d");
+
+        context.fillStyle = "#DDDDDD";
+
+        for (var i=0; i<49; i++){
+          context.fillRect(0, i * 10 + 9, 990, 1);
+        }
+
+        for (var i=0; i<99; i++){
+          context.fillRect(i * 10 + 9, 0, 1, 490);
+        }
+      }
+
+      function setUpSquares(){
         //create and draw single square when page is loaded
         generationNumber = 0;
 
@@ -23,8 +45,6 @@
         generationSquares = squares;
 
         drawGeneration();
-
-        document.getElementById("button").disabled = false;
       }
 
       function startStop(){
@@ -109,7 +129,7 @@
           context.fillStyle = "white";
         }
 
-        context.fillRect(column * 10, row * 10, 10, 10)
+        context.fillRect(column * 10, row * 10, 9, 9)
       }
     </script>
     <style type="text/css">
@@ -119,7 +139,8 @@
       }
       canvas {
         background-color: #C0C0D0;
-        border: 1px solid #A0A0B0;
+        border-left: 1px solid #DDDDDD;
+        border-top: 1px solid #DDDDDD;
       }
       input[type = "button"] {
         padding: 1em;
@@ -129,7 +150,7 @@
       }
     </style>
   </head>
-  <body onload="javascript: makeInitialGeneration();">
+  <body onload="javascript: setUp();">
     <h1>Rule 30 Cellular Automata</h1>
     <p><canvas id="grid" width="990" height="490"></canvas></p>
     <p><input id="button" type="button" value="Start" disabled onclick="javascript: startStop();"></p>
