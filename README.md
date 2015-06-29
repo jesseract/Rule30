@@ -4,6 +4,6 @@ This is a HTML/javascript program to compute and show successive iterations of t
 
 ##To run
 
-In order to run this file, click this link:
+In order to run this file, click [this link](http://htmlpreview.github.io/?https://github.com/jesseract/Rule30/blob/master/rule30.html).
 
-To see the source code, go to GitHub:
+To see the source code, go to [GitHub](https://github.com/jesseract/Rule30).
