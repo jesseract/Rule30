@@ -23,6 +23,8 @@
         generationSquares = squares;
 
         drawGeneration();
+
+        document.getElementById("button").disabled = false;
       }
 
       function startStop(){
@@ -122,6 +124,6 @@
   <body onload="javascript: makeInitialGeneration();">
     <h1>Rule 30 Cellular Automata</h1>
     <p><canvas id="grid" width="990" height="490"></canvas></p>
-    <p><input id="button" type="button" value="Start" onclick="javascript: startStop();"></p>
+    <p><input id="button" type="button" value="Start" disabled onclick="javascript: startStop();"></p>
   </body>
 </html>
